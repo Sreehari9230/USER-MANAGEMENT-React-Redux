@@ -5,7 +5,7 @@ import { body,validationResult } from "express-validator";
 
 
 const createUser = async (req, res) => {
-
+     console.log("vernddd")
     try {
         const errors = validationResult(req);
         
@@ -15,11 +15,14 @@ const createUser = async (req, res) => {
 
         const { name, email, phone, password, confirmpassword } = req.body;
 
+        console.log(req.body)
+
         if (password !== confirmpassword) {
             return res.status(400).json({ success: false, validation: false, message: "Password and confirm password do not match" });
         }
 
         const userData = await userrModel.findOne({ email: email });
+        console.log(userData)
 
         const mobile = await userrModel.findOne({ phone: phone });
         if (userData) {
@@ -32,9 +35,11 @@ const createUser = async (req, res) => {
                 name:name,
                 email:email,
                 phone:phone,
-                password: hashPassword
+                password: hashPassword,
+                isVerified:true
             });
                 const userData = await newUser.save();
+                console.log("userdata ivde" ,userData)
             return res.status(201).json({ success: true, message: 'User created successfully', user: userData });
         }
     } catch (error) {
@@ -108,6 +113,8 @@ try {
 
 
 const editProfile = async (req,res)=>{
+
+    console.log("edittt")
     try {
         const userId = req.params.userId
         const userData = await userrModel.findOne({_id:userId})
@@ -124,6 +131,7 @@ const editProfile = async (req,res)=>{
 }
 
 const loadEditProfile = async (req,res)=>{
+    console.log("loaddd")
 try {
     const errors = validationResult(req);
     console.log(errors.array())
