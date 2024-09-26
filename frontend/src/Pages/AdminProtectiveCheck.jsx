@@ -1,20 +1,20 @@
-// import { useEffect } from 'react';
-// import { useSelector } from 'react-redux';
-// import { useNavigate, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate, useLocation } from 'react-router-dom';
 
-// const AdminProtectiveCheck = ({ children }) => {
-//   const navigate = useNavigate();
-//   const location = useLocation();
-//   const isVerifiedAdmin = useSelector((state) => state.admin.isVerifiedAdmin);
+const AdminProtectiveCheck = ({ children }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isVerifiedAdmin = useSelector((state) => state.admin.isVerifiedAdmin);
 
-//   useEffect(() => {
+  useEffect(() => {
 
-//     if (!isVerifiedAdmin) {
-//       console.log("User is not verified. Redirecting to login page.");
-//       navigate('/admin/login');
-//     }
-//   }, [isVerifiedAdmin, location, navigate]);
-//   return isVerifiedAdmin ? <>{children}</> : null;
-// };
+    if (!isVerifiedAdmin) {
+      console.log("User is not verified. Redirecting to login page.");
+      navigate('/admin/login');
+    }
+  }, [isVerifiedAdmin, location, navigate]);
+  return isVerifiedAdmin ? <>{children}</> : null;
+};
 
-// export default AdminProtectiveCheck;
+export default AdminProtectiveCheck;

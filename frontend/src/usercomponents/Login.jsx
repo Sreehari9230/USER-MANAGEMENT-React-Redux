@@ -6,7 +6,6 @@ import {useDispatch } from "react-redux";
 import { addItems,addMail } from "../redux/tokenslice";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
 const Login = () =>{
     const navigate = useNavigate()
 
@@ -17,24 +16,29 @@ const Login = () =>{
     const [passwordError,setPasswordError] = useState('')
 
     const handlesubmit = async (e)=>{
-       e.preventDefault()
-       try {
-          setEmailError('')
-          setPasswordError('')
-          const value = {email,password}
-          const response = await axios.post('http://localhost:3000/api/login',value);
-          const userData = response.data
 
-          if(userData.success){
+        e.preventDefault()
+        try {
+            setEmailError('')
+            setPasswordError('')
+            const value = {email,password}
+            const response = await axios.post('http://localhost:3000/api/login',value);
+            console.log("1",response)
+            const userData = response.data
+            
+            if(userData.success){
             toast.success('login success')
+
             console.log(userData.accessToken,"access token in login")
             console.log("herepopopo")
             dispatch(addItems({
                 isVerifiedUser: true,
                 accessToken: userData.accessToken,
             }));
+
             console.log(userData.email)
             dispatch((addMail(userData.email)))
+
             navigate('/home')
           }else{
             if(response.data.validation){

@@ -17,11 +17,11 @@ const accessToken = useSelector((store) => store.user.UseraccessToken);
                 if (accessToken) {
                     console.log(accessToken, "the access token here");
                     const decoded = jwtDecode(accessToken);
-                    console.log(decoded.user.email,"opopopo")
-                    const response = await axios.post('http://localhost:3000/api/getuser', { email: decoded.user.email },{
+                    console.log(decoded.user,"opop")
+                    const response = await axios.post('http://localhost:3000/api/getuser', { accessToken },{
                         headers:{
-                            'Content-Type' : 'application/json'
-                        }
+                          'Content-Type': 'application/json',
+                          Authorization: `Bearer ${accessToken}`                        }
                     });
                     setUserData(response.data.user);
                 } else {
@@ -48,6 +48,7 @@ const accessToken = useSelector((store) => store.user.UseraccessToken);
     /> */}
     <h2 className="text-center font-weight-bold mb-3">Welcome to Home</h2>
     <div className="d-flex flex-column">
+    <img src={userData.image} alt="User Avatar" class="img-fluid rounded-circle mx-auto d-block mb-4" style={{width: '8rem', height:'8rem'}} />
       <div className="d-flex align-items-center mb-2">
         <h5 className="mb-0">Name: {userData.name}</h5>
       </div>

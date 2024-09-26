@@ -12,9 +12,11 @@ function EditProfile() {
     const [name,setName]=useState('')
     const [email,setEmail] = useState('');
     const[phone,setPhone] = useState('')
+    const [image,setImage] = useState(null)
     const navigate = useNavigate()
     const [nameError,setNameError] = useState('')
     const [phoneError,setPhoneError] = useState('')
+
     const accessToken = useSelector((store)=>store.user.UseraccessToken)
 
     useEffect(()=>{
@@ -23,7 +25,7 @@ function EditProfile() {
             try {
                 const decoded = jwtDecode(accessToken); 
                 console.log(decoded.user._id,"decoded")
-                const response = await axios.post(`http://localhost:3000/api/editprofile/${decoded.user._id}`);
+                const response = await axios.post(`http://localhost:3000/api/editprofile/${decoded.user.user._id}`);
                 setName(response.data.user.name)
                 setEmail(response.data.user.email)
                 setPhone(response.data.user.phone)
@@ -39,10 +41,15 @@ function EditProfile() {
        try {
         setNameError('')
         setPhoneError('')
+        console.log(image,"image here")
         const formData = new FormData()
         formData.append('name',name)
         formData.append('email',email)
         formData.append('phone',phone)
+        if(image){
+            formData.append('image',image)
+            console.log(image,"image vernd")
+        }
       
         for (let pair of formData.entries()) {
             console.log(pair[0] + ': ' + pair[1]);
@@ -50,7 +57,7 @@ function EditProfile() {
 
         const response = await axios.post('http://localhost:3000/api/editprofile', formData, {
             headers: {
-              'Content-Type':'application/json'
+              'Content-Type':'multipart/form-data'
             }
           });
           
@@ -121,14 +128,14 @@ function EditProfile() {
                         />
                         {phoneError && <span className="text-danger">{phoneError}</span>}
                     </div>
-                    {/* <div className="mb-3">
+                     <div className="mb-3">
                         <input
                             type="file"
                             onChange={(e) => setImage(e.target.files[0])}
                             className="form-control"
                             name="image"
                         />
-                    </div> */}
+                    </div> 
                     <div className="d-flex justify-content-center">
                         <button type="submit" className="btn btn-dark text-white">Submit</button>
                     </div>

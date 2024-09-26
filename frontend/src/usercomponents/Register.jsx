@@ -13,6 +13,7 @@ function Register() {
     const EmailRef = useRef()
     const PasswordRef = useRef()
     const confirmPassRef = useRef()
+    const imageRef = useRef()
    
     const navigate = useNavigate()
 
@@ -21,6 +22,7 @@ function Register() {
     const [emailError,setEmailError] = useState('')
     const [passwordError,setPasswordError] = useState('')
     const [confirmPasswordError,setConfirmPassError] = useState('')
+    const [imageError,setImageError] = useState('')
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -30,23 +32,35 @@ function Register() {
           setPhoneError('');
           setPasswordError('');
           setConfirmPassError('');
+          setImageError('');
       
           const formData = new FormData();
           formData.append('name', nameRef.current.value);
           formData.append('email', EmailRef.current.value);
           formData.append('phone', phoneRef.current.value);
           formData.append('password', PasswordRef.current.value);
+          formData.append('image', imageRef.current.files[0]);
           formData.append('confirmpassword', confirmPassRef.current.value);
       
+
+
+          if (!imageRef.current.files[0]) {
+            setImageError('Please upload an image.');
+            return;
+        }else{
+          console.log("jkrhlnfka")
+        }
+        
           for (let [key, value] of formData.entries()) {
              console.log(`${key}:${value}`)
           }
-
-        const response = await axios.post('http://localhost:3000/api/create', formData, {
-    headers: {
-        'Content-Type': 'application/json',
-    },
-});
+     
+          const response = await axios.post('http://localhost:3000/api/create', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            },
+        });
+        
 
 
 
@@ -57,6 +71,7 @@ function Register() {
             nameRef.current.value = '';
             EmailRef.current.value = '';
             phoneRef.current.value = '';
+            imageRef.current.value = null
             PasswordRef.current.value = '';
             confirmPassRef.current.value = '';
             navigate('/');
@@ -79,6 +94,9 @@ function Register() {
                   case 'confirmpassword':
                     setConfirmPassError(error.msg);
                     break;
+                   case 'image' :{
+                     setImageError(error.msg)
+                   } 
                   default:
                     break;
                 }
@@ -147,6 +165,10 @@ function Register() {
                             name="confirmPassword"
                         />
                         {confirmPasswordError && <span className="text-danger">{confirmPasswordError}</span>}
+                    </div>
+                    <div className="mb-4">
+                        <input ref={imageRef} type="file" className="border rounded w-full p-1 mb-1" name="image" />
+                        {imageError && <span className="text-red-500">{imageError}</span>}
                     </div>
                     <div className="d-flex justify-content-center mb-3">
                         <button type="submit" className="btn btn-dark">Signup</button>

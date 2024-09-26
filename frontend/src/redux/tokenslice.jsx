@@ -5,11 +5,9 @@ const initialState = {
   UseraccessToken: localStorage.getItem('usetoken')|| '',
 };
 
-
 const initialAdminState = {
     isVerifiedAdmin:false,
-    AdminAccessToken:'',
-    AdminRefreshToken:'',
+    AdminAccessToken:localStorage.getItem('admintoken')||'',
 };
 
 const InitialState = {
@@ -28,6 +26,7 @@ const tokenSlice = createSlice({
           state.UseraccessToken = token;
           state.isVerifiedUser = action.payload.isVerifiedUser
           localStorage.setItem('usetoken',token)
+          
       },
       removeItems: (state, action) => {
           state.isVerifiedUser = action.payload.isVerifiedUser;
@@ -41,14 +40,21 @@ const tokenSlice = createSlice({
 });
 
 
+
+
   const adminTokenSlice = createSlice({
     name: 'adminToken',
     initialState: initialAdminState,
     reducers: {
       addAdminItems: (state, action) => {
+        const admintoken= action.payload
+        state.isVerifiedAdmin = action.payload.isVerifiedAdmin;
+        state.AdminAccessToken = admintoken;
+        localStorage.setItem('admintoken',admintoken)
       },
       removeAdminItems: (state) => {
-      
+        state.isVerifiedAdmin = false;
+        state.AdminAccessToken = '';
       },
       resetAdmin: (state) => {
         Object.assign(state, initialAdminState);
@@ -68,7 +74,6 @@ const tokenSlice = createSlice({
       },
     },
   });
-
 
 
 const emilReducer = createSlice({

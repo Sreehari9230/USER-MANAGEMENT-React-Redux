@@ -5,8 +5,9 @@ import Header from '../components/Header'
 import Hero from '../components/Hero'
 import { useSelector } from 'react-redux'
 const  Home= () =>{
+
+
     const email = useSelector((state)=>state.emailData)
-    console.log(email,"email ivade ethii")
   return (
     <>
     <Header/>
