@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import router from './route/userRoute.js'; // Adjust the path as needed
+import router from './route/userRoute.js';
 import mongoose from 'mongoose';
 import databaseConnection from './utils/db.js';
 import dotenv from 'dotenv';

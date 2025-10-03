@@ -173,7 +173,7 @@ function AdminAdduser() {
                         {imageError && <span className="text-red-500">{imageError}</span>}
                     </div>
                     <div className="d-flex justify-content-center mb-3">
-                        <button type="submit" className="btn btn-dark">Signup</button>
+                        <button type="submit" className="btn btn-dark">Add User</button>
                     </div>
                 </form>
             </div>
