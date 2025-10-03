@@ -15,12 +15,12 @@ cloudinary.config({
 const createUser = async (req, res) => {
     try {
         console.log("ivade thanne")
-        const errors = validationResult(req);
+        // const errors = validationResult(req);
         
-        if (!errors.isEmpty()) {
-            console.log("ioioiooioioo")
-            return res.status(400).json({ success: false, validation: true, message: 'Validation errors', errors: errors.array() });
-        }
+        // if (!errors.isEmpty()) {
+        //     console.log("ioioiooioioo")
+        //     return res.status(400).json({ success: false, validation: true, message: 'Validation errors', errors: errors.array() });
+        // }
 
         const { name, email, phone, password, confirmpassword } = req.body;
         console.log("here")
@@ -87,11 +87,11 @@ const generateRefreshToken = async (user) => {
 const userLogin = async (req,res)=>{
     const errors = validationResult(req)
     
-    if(!errors.isEmpty()){
-        console.log("error here")
-        console.log(errors)
-     return res.status(200).json({ success: false, validation:true ,message: 'Validation errors', errors: errors.array() });
-    } 
+    // if(!errors.isEmpty()){
+    //     console.log("error here")
+    //     console.log(errors)
+    //  return res.status(200).json({ success: false, validation:true ,message: 'Validation errors', errors: errors.array() });
+    // } 
 
     const {email,password} = req.body
     console.log("hello")

@@ -3,7 +3,7 @@ import { createUser, editProfile, loadEditProfile, userLogin,userProfiile, } fro
 import path from 'path';
 import multer from 'multer'
 import {fileURLToPath} from 'url'
-import { registerValidator, loginValidation, editUserValidation } from '../validation/validation.js';
+import { registerValidator, loginValidation, editUserValidation } from '../validation/validation.js'; 
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)

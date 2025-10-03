@@ -68,7 +68,7 @@ function Register() {
           console.log(response,"response")
           if (response.data.success) {
             toast.success("Registration Successful");
-            nameRef.current.value = '';
+            nameRef.current.value = ''; 
             EmailRef.current.value = '';
             phoneRef.current.value = '';
             imageRef.current.value = null
