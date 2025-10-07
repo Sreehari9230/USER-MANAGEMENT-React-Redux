@@ -1,6 +1,6 @@
 import { v2 as cloudinary } from 'cloudinary';
 
-const cloudinary = require('cloudinary').v2
+const cloudinary = require('cloudinary').v2  
 
  // Configuration
  cloudinary.config({ 
