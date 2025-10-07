@@ -35,9 +35,9 @@ const adminLogin = async(req,res)=>{
     try {
         const errors = validationResult(req)
         console.log(errors.array())
-        if(!errors.isEmpty()){
-            return res.status(200).json({success:false,message:"error occured in validation"})
-        }
+        // if(!errors.isEmpty()){
+        //     return res.status(200).json({success:false,message:"error occured in validation"})
+        // }
 
         const {email,password} = req.body;
         console.log(req.body)

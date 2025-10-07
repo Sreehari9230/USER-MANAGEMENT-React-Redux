@@ -161,9 +161,9 @@ const loadEditProfile = async (req,res)=>{
 try {
     const errors = validationResult(req);
     console.log(errors.array())
-    if(!errors.isEmpty()){
-        return res.status(200).json({success:false,message:"validation error",errors:errors.array()})
-    }
+    // if(!errors.isEmpty()){
+    //     return res.status(200).json({success:false,message:"validation error",errors:errors.array()})
+    // }
     const {name,phone,email} = req.body;
     const image = req.file;
     console.log(image)
