@@ -81,9 +81,9 @@ const generateAccessToken = async (user) => {
 
 
 const generateRefreshToken = async (user) => {
-    return generateToken(user, 'my_refresh_key', '1y', 'refresh');
+    return generateToken(user, 'my_refresh_key', '1y', 'refresh');    
 }
-
+ 
 const userLogin = async (req,res)=>{
     const errors = validationResult(req)
     
